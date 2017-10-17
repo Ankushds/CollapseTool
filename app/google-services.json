@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "559379035338-9bnpdmupcluli3fd7lpb6lnabnq6jgoa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.hitech.com.collapsingtoolbar",
+            "certificate_hash": "75aa3ade33b3ffe628e2225398eb0ba4d0d0eab5"
+          }
+        },
+        {
           "client_id": "559379035338-k3nt0971rtmb95m97qvfea14c14svr6k.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559379035338-k3nt0971rtmb95m97qvfea14c14svr6k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

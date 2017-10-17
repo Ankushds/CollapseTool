@@ -7,13 +7,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.JsonRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.io.BufferedReader
+import org.json.JSONObject
 import java.io.InputStream
-import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.HashMap
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -30,41 +37,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         userName = findViewById(R.id.userName) as EditText
         password = findViewById(R.id.password) as EditText
         submitBtn = findViewById(R.id.submitBtn) as Button
-        userName.setOnClickListener(this)
-        password.setOnClickListener(this)
         submitBtn.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View) {
-        when (v.id) {
-            R.id.submitBtn -> {
-                user = userName.text.toString()
-                pass = password.text.toString()
-                if (user != null && pass != null) {
-                    db = FirebaseDatabase.getInstance()
-                    val dbRefrence = db.getReference()
-                    account = dbRefrence.child("Accounts").child(user)
-                    Log.i("TheResultIs :", "BlankkResult")
-                    SendindDataTask().execute()
-                }
-            }
-        }
+
     }
 
-    class SendindDataTask : AsyncTask<Void, Void, String>() {
-        var loginUrl: String = "http://192.168.12.56:8080/MyLoginApplication/login"
-        var inputStream: InputStream? = null
-        override fun doInBackground(vararg params: Void): String {
-            val result = URL(loginUrl)
-            val conn = result.openConnection() as HttpURLConnection
-            conn.requestMethod = "GET"
-            conn.connect()
-            inputStream = conn.inputStream
-            val fs = inputStream.toString()
-            Log.i("TheResultIs :", fs)
-            return ""
-        }
-    }
 }
 
 
