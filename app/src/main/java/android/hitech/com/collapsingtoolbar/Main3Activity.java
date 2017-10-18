@@ -2,8 +2,11 @@ package android.hitech.com.collapsingtoolbar;
 
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,20 +30,55 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main3Activity extends AppCompatActivity implements View.OnScrollChangeListener {
-
+public class Main3Activity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+GestureDetectorCompat gestureDetector;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setOnScrollChangeListener(this);
+        gestureDetector = new GestureDetectorCompat(this,this);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
 
     }
 
     @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        System.out.println("Scroll X :"+scrollX+" Scroll Y :"+scrollY+" oldScroll X :"+oldScrollX+" oldScroll Y :"+oldScrollY);
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        TextView tv = (TextView) findViewById(R.id.tv);
+        android.view.ViewGroup.LayoutParams params = tv.getLayoutParams();
+        params.width = (int) e2.getY(0);
+        params.height = (int) e2.getY(0);
+        tv.setLayoutParams(params);
+        System.out.println("MotionEvent :"+e2.getY(0));
+        return true;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
     }
 
  /*   @Override
